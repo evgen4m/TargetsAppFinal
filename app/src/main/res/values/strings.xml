@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">TargetAppFinal</string>
+    <string name="bluetooth_on_off">Вкл./Выкл. Bluetooth</string>
+    <string name="btuetooth_off">Bluetooth выключен!</string>
+    <string name="enable_search">Начать поиск</string>
+    <string name="name_device">Имя устройства</string>
+    <string name="address_device">Адрес</string>
+    <string name="stop_search">Остановить поиск</string>
+    <string name="text_connection">Подключение</string>
+    <string name="text_please_wait">Подождите</string>
+</resources>
