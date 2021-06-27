@@ -1,18 +1,19 @@
 package com.esoft.targetappfinal.bluetooth
 
-import android.app.AlertDialog
-import android.app.Dialog
 import android.app.ProgressDialog
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothSocket
 import android.content.Context
-import android.content.DialogInterface
+import android.os.Handler
+import android.os.Message
 import android.util.Log
 import java.io.IOException
+import java.io.InputStream
+import java.io.OutputStream
 import java.lang.reflect.Method
 
-class ConnectThread(context: Context, btAdapter: BluetoothAdapter, btDevice: BluetoothDevice, pbProgress: ProgressDialog): Thread() {
+class ConnectThread(context: Context, btAdapter: BluetoothAdapter, btDevice: BluetoothDevice, pbProgress: ProgressDialog, handler: Handler): Thread() {
 
     var context: Context
     var btAdapter: BluetoothAdapter
@@ -21,12 +22,15 @@ class ConnectThread(context: Context, btAdapter: BluetoothAdapter, btDevice: Blu
     var progressDialog: ProgressDialog
     var succes = false
     lateinit var connectedThread: ConnectedThread
+    private val handler: Handler
+    val message = Message.obtain()
 
     init {
         this.context = context
         this.btAdapter = btAdapter
         this.btDevice = btDevice
         this.progressDialog = pbProgress
+        this.handler = handler
 
         try {
             //btSocket = btDevice.createRfcommSocketToServiceRecord(java.util.UUID.fromString(UUID))
@@ -48,6 +52,8 @@ class ConnectThread(context: Context, btAdapter: BluetoothAdapter, btDevice: Blu
             btSocket.connect()
             succes = true
             progressDialog.dismiss()
+            message.what = CONNECT_MESSAGE
+            handler.sendMessage(message)
             Log.d("MYLOG", "CONNECTED")
         }catch (e: IOException){
             Log.d("MYLOG", "NOT CONNECTED")
@@ -56,7 +62,8 @@ class ConnectThread(context: Context, btAdapter: BluetoothAdapter, btDevice: Blu
         }
 
         if (succes) {
-            connectedThread = ConnectedThread(btSocket)
+            Log.d("MYLOG", "Соединение установлено")
+            connectedThread = ConnectedThread(btSocket, handler)
             connectedThread.start()
         }
     }
@@ -65,8 +72,11 @@ class ConnectThread(context: Context, btAdapter: BluetoothAdapter, btDevice: Blu
         try {
             btSocket.close()
             progressDialog.dismiss()
+            message.what = DISCONNECT_MESSAGE
+            handler.sendMessage(message)
         }catch (e: IOException) {
             e.printStackTrace()
         }
     }
+
 }
