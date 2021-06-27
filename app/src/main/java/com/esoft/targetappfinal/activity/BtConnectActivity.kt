@@ -10,6 +10,8 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.CompoundButton
 import androidx.appcompat.app.AppCompatActivity
@@ -34,6 +36,10 @@ class BtConnectActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeLis
         setContentView(R.layout.activity_bt_connect)
 
         setSupportActionBar(toolbar)
+        toolbar.setNavigationIcon(R.drawable.ic_toolbar_onback);
+        toolbar.setNavigationOnClickListener {
+            onBackPressed()
+        }
 
         val filter = IntentFilter()
         filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED)
@@ -169,4 +175,22 @@ class BtConnectActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeLis
         frame_noConnect.visibility = View.VISIBLE
         frame_getDevices.visibility = View.GONE
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.bt_connect_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.btn_bt_connect -> {
+
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
 }

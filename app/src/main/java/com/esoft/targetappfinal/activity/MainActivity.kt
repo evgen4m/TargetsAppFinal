@@ -101,6 +101,11 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private fun init() {
+        pref = getSharedPreferences(MY_PREF, Context.MODE_PRIVATE)
+        btConnect = BtConnection(this)
+    }
+
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater = menuInflater
@@ -108,10 +113,7 @@ class MainActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
-    private fun init() {
-        pref = getSharedPreferences(MY_PREF, Context.MODE_PRIVATE)
-        btConnect = BtConnection(this)
-    }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {

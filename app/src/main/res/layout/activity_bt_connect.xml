@@ -10,9 +10,10 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/teal_200"
+        android:background="@color/toolbarColor"
         android:layout_gravity="top"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent">
+    </androidx.appcompat.widget.Toolbar>
 
     <LinearLayout
         android:id="@+id/frame_options"
@@ -38,7 +39,7 @@
             android:id="@+id/frame_noConnect"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/tv_message"
@@ -66,11 +67,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/ic_bt_connect"
+                android:clickable="true"
                 android:text="@string/enable_search"
                 android:textAllCaps="false"
                 android:textColor="@color/black"
-                android:textStyle="normal">
+                android:textStyle="normal"
+                android:focusable="true">
 
             </Button>
 

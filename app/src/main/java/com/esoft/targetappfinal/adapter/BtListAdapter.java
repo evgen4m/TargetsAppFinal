@@ -17,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.esoft.targetappfinal.R;
 import com.esoft.targetappfinal.bluetooth.BtConstKt;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,6 +65,7 @@ public class BtListAdapter extends BaseAdapter {
             viewHolder.btName = convertView.findViewById(R.id.tv_name);
             viewHolder.btAdress = convertView.findViewById(R.id.tv_address);
             viewHolder.chBtSelected = convertView.findViewById(R.id.chConnection);
+            //viewHolder.bt_position = convertView.findViewById(R.id.tv_position);
             convertView.setTag(viewHolder);
             lisViewHolders.add(viewHolder);
         }else{
@@ -112,6 +115,7 @@ public class BtListAdapter extends BaseAdapter {
     }
 
     static class ViewHolder {
+        TextView bt_position;
         TextView btName;
         TextView btAdress;
         CheckBox chBtSelected;
