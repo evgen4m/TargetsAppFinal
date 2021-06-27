@@ -52,27 +52,24 @@ class MainActivity : AppCompatActivity() {
         pbProg.setTitle(getString(R.string.text_connection))
         pbProg.setMessage(getString(R.string.text_please_wait))
 
-        handler = @SuppressLint("HandlerLeak")
-        object : Handler() {
-            override fun handleMessage(msg: Message) {
-                when (msg.what) {
-                    RECIEVE_MESSAGE -> {
-                        val readBuf = msg.obj as ByteArray
-                        val strIncom = String(readBuf, 0, msg.arg1)
-                        sb.append(strIncom) // формируем строку
-                        val endOfLineIndex = sb.indexOf("\r\n") // определяем символы конца строки
-                        if (endOfLineIndex > 0) {                                            // если встречаем конец строки,
-                            val sbprint = sb.substring(0, endOfLineIndex) // то извлекаем строку
-                            sb.delete(0, sb.length) // и очищаем sb
-                            Log.d("MYLOG", sbprint)
+        runOnUiThread {
+            handler = @SuppressLint("HandlerLeak")
+            object : Handler() {
+                override fun handleMessage(msg: Message) {
+                    when (msg.what) {
+                        RECIEVE_MESSAGE -> {
+                            val readBuf = msg.obj as ByteArray
+                            val strIncom = String(readBuf, 0, msg.arg1)
+                            sb.append(strIncom) // формируем строку
+                            val endOfLineIndex = sb.indexOf("\r\n") // определяем символы конца строки
+                            if (endOfLineIndex > 0) {                                            // если встречаем конец строки,
+                                val sbprint = sb.substring(0, endOfLineIndex) // то извлекаем строку
+                                sb.delete(0, sb.length) // и очищаем sb
+                                Log.d("MYLOG", sbprint)
+                            }
                         }
-                    }
-
-                    CONNECT_MESSAGE -> {
-
-                    }
-
-                    DISCONNECT_MESSAGE -> {
+                        CONNECT_MESSAGE_COMPLITE -> connectStatus.text = "Подключено"
+                        DISCONNECT_MESSAGE -> connectStatus.text = "Отключено"
 
                     }
                 }

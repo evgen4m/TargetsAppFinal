@@ -8,4 +8,10 @@
     <string name="stop_search">Остановить поиск</string>
     <string name="text_connection">Подключение</string>
     <string name="text_please_wait">Подождите</string>
+    <string name="targer_1">Мишень 1</string>
+    <string name="targer_2">Мишень 2</string>
+    <string name="target_3">Мишень 3</string>
+    <string name="targer_4">Мишень 4</string>
+    <string name="targer_5">Мишень 5</string>
+    <string name="device_not_connected">Устройство не подключено!</string>
 </resources>

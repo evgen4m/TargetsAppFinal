@@ -11,5 +11,6 @@ const val BT_CON_TAG = "BtConnection.class"
 
 // Статус Handler
 const val RECIEVE_MESSAGE = 1
-const val CONNECT_MESSAGE = 2
+const val CONNECT_MESSAGE_COMPLITE = 2
 const val DISCONNECT_MESSAGE = 3
+const val CONNECT_MESSAGE = 4

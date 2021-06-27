@@ -9,8 +9,6 @@ import android.os.Handler
 import android.os.Message
 import android.util.Log
 import java.io.IOException
-import java.io.InputStream
-import java.io.OutputStream
 import java.lang.reflect.Method
 
 class ConnectThread(context: Context, btAdapter: BluetoothAdapter, btDevice: BluetoothDevice, pbProgress: ProgressDialog, handler: Handler): Thread() {
@@ -52,7 +50,7 @@ class ConnectThread(context: Context, btAdapter: BluetoothAdapter, btDevice: Blu
             btSocket.connect()
             succes = true
             progressDialog.dismiss()
-            message.what = CONNECT_MESSAGE
+            message.what = CONNECT_MESSAGE_COMPLITE
             handler.sendMessage(message)
             Log.d("MYLOG", "CONNECTED")
         }catch (e: IOException){
