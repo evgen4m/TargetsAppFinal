@@ -14,6 +14,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.esoft.targetappfinal.R
 import com.esoft.targetappfinal.bluetooth.*
+import com.esoft.targetappfinal.helper.StringHelper
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -66,10 +67,37 @@ class MainActivity : AppCompatActivity() {
                                 val sbprint = sb.substring(0, endOfLineIndex) // то извлекаем строку
                                 sb.delete(0, sb.length) // и очищаем sb
                                 Log.d("MYLOG", sbprint)
+                                if(sbprint.isNotEmpty() && sbprint.length == 51) {
+                                    runOnUiThread {
+                                        hit_1.text = StringHelper().getInfoHits1(sbprint)
+                                        btr_1.text = StringHelper().getInfoBtr1(sbprint)
+
+                                        hit_2.text = StringHelper().getInfoHits2(sbprint)
+                                        btr_2.text = StringHelper().getInfoBtr2(sbprint)
+
+                                        hit_3.text = StringHelper().getInfoHits3(sbprint)
+                                        btr_3.text = StringHelper().getInfoBtr3(sbprint)
+
+                                        hit_4.text = StringHelper().getInfoHits4(sbprint)
+                                        btr_4.text = StringHelper().getInfoBtr4(sbprint)
+
+                                        hit_5.text = StringHelper().getInfoHits5(sbprint)
+                                        btr_5.text = StringHelper().getInfoBtr5(sbprint)
+                                    }
+
+                                }
+
                             }
                         }
-                        CONNECT_MESSAGE_COMPLITE -> connectStatus.text = "Подключено"
-                        DISCONNECT_MESSAGE -> connectStatus.text = "Отключено"
+                        CONNECT_MESSAGE_COMPLITE -> {
+                            connectStatus.text = "Подключено"
+                            btn_connect.text = "Отключить"
+                        }
+                        DISCONNECT_MESSAGE -> {
+                            connectStatus.text = "Отключено"
+                            btn_connect.text = "Подключить"
+                            clearView()
+                        }
 
                     }
                 }
@@ -99,6 +127,17 @@ class MainActivity : AppCompatActivity() {
             btConnect.sendMsg(";", this, handler)
         }
 
+        btn_send_settings.setOnClickListener {
+
+            val parM1 = intent.getStringExtra("parM1")
+            val parM2 = intent.getStringExtra("parM2")
+            val parM3 = intent.getStringExtra("parM3")
+            val parM4 = intent.getStringExtra("parM4")
+            val parM5 = intent.getStringExtra("parM5")
+            btConnect.sendMsg(parM1 + parM2 + parM3 + parM4 + parM5, this, handler)
+
+        }
+
     }
 
     private fun init() {
@@ -114,7 +153,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.tgSettings -> {
@@ -127,6 +165,24 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    fun clearView() {
+
+        hit_1.text = ""
+        btr_1.text = ""
+
+        hit_2.text = ""
+        btr_2.text = ""
+
+        hit_3.text = ""
+        btr_3.text = ""
+
+        hit_4.text = ""
+        btr_4.text = ""
+
+        hit_5.text = ""
+        btr_5.text = ""
     }
 
 

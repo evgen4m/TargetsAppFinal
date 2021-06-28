@@ -19,7 +19,7 @@ class BtConnection
     private lateinit var btDevice: BluetoothDevice
     private var connectThread: ConnectThread? = null
     private var connectedThread: ConnectedThread? = null
-    val message = Message.obtain()
+
 
     constructor(context: Context) {
         this.context = context
@@ -30,12 +30,14 @@ class BtConnection
     fun connect(pbProgress: ProgressDialog, context: Context, handler: Handler) {
         val macAdress = pref.getString(MAC_KEY, "")
         if(!btAdapter.isEnabled || macAdress!!.isEmpty()) {
+            val message = Message.obtain()
             message.what = DISCONNECT_MESSAGE
             handler.sendMessage(message)
             return
         }
         btDevice = btAdapter.getRemoteDevice(macAdress)
         if (btDevice == null) {
+            val message = Message.obtain()
             message.what = DISCONNECT_MESSAGE
             handler.sendMessage(message)
             return
@@ -51,6 +53,9 @@ class BtConnection
             connectedThread!!.write(msg)
         }catch (e: Exception) {
             Log.d(BT_CON_TAG, e.printStackTrace().toString())
+            val message = Message.obtain()
+            message.what = DISCONNECT_MESSAGE
+            handler.sendMessage(message)
             Toast.makeText(context, "Устройство не подключено!", Toast.LENGTH_SHORT).show()
         }
     }

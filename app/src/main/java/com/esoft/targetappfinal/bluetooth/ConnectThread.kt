@@ -41,6 +41,7 @@ class ConnectThread(context: Context, btAdapter: BluetoothAdapter, btDevice: Blu
             progressDialog.show()
         }catch (e: IOException) {
             e.printStackTrace()
+            Log.d("MYLOG", "Ошибка подключения!")
         }
     }
 

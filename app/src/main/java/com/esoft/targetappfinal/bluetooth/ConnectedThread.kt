@@ -2,6 +2,7 @@ package com.esoft.targetappfinal.bluetooth
 
 import android.bluetooth.BluetoothSocket
 import android.os.Handler
+import android.os.Message
 import android.util.Log
 import java.io.*
 import java.util.*
@@ -38,6 +39,10 @@ class ConnectedThread(socket: BluetoothSocket,handler: Handler) : Thread() {
                 outputStream!!.flush()
             } catch (e: IOException) {
                 e.printStackTrace()
+                Log.d("ConnectedThread", "Нет соединения!")
+                val message = Message.obtain()
+                message.what = DISCONNECT_MESSAGE
+                handler.sendMessage(message)
             }
         }
     }

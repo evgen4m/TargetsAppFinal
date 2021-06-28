@@ -57,14 +57,16 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
 
-        <ImageButton
+        <Button
             android:id="@+id/btn_connect"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ripple_rectangl"
+            android:layout_width="110dp"
+            android:layout_height="36dp"
+            android:background="@drawable/ic_btn_connect"
             android:clickable="true"
             android:focusable="true"
-            android:src="@drawable/ic_btn_connect"
+            android:text="Подключить"
+            android:textStyle="normal"
+            android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="@+id/button"
             app:layout_constraintEnd_toStartOf="@+id/button1"
             app:layout_constraintStart_toEndOf="@+id/button"
