@@ -140,15 +140,10 @@ class BtConnectActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeLis
         when (type) {
             BT_BOUNDED -> {
                 devices = getBoundedDevice()
-                listAdapter = BtListAdapter(this, devices)
-                tv_bt_device.adapter = listAdapter
-            }
-            BT_SEARCH -> {
-                devices!!.clear()
-                listAdapter = BtListAdapter(this, devices)
-                tv_bt_device.adapter = listAdapter
             }
         }
+        listAdapter = BtListAdapter(this, devices)
+        tv_bt_device.adapter = listAdapter
     }
 
     private fun enableSearch() {
@@ -202,4 +197,9 @@ class BtConnectActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeLis
         return super.onOptionsItemSelected(item)
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(receiver)
+        btAdapter.cancelDiscovery()
+    }
 }
