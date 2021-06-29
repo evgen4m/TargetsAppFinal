@@ -3,6 +3,9 @@ package com.esoft.targetappfinal.bluetooth
 // Константы сохранения данных на устройстве
 const val MY_PREF = "my_pref"
 const val MAC_KEY = "mac_key"
+const val SETTINGS_KEY = "set_key"
+const val DEVICE_NAME_KEY = "device_name"
+
 
 
 // Константы ошибок в классах и активностях

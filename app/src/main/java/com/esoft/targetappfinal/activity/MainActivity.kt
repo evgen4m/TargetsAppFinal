@@ -11,6 +11,8 @@ import android.os.Message
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.esoft.targetappfinal.R
 import com.esoft.targetappfinal.bluetooth.*
@@ -53,9 +55,13 @@ class MainActivity : AppCompatActivity() {
         pbProg.setTitle(getString(R.string.text_connection))
         pbProg.setMessage(getString(R.string.text_please_wait))
 
+        println(pref.getString(SETTINGS_KEY, ""))
+        println(pref.getString(MAC_KEY, ""))
+
         runOnUiThread {
             handler = @SuppressLint("HandlerLeak")
             object : Handler() {
+                @SuppressLint("SetTextI18n")
                 override fun handleMessage(msg: Message) {
                     when (msg.what) {
                         RECIEVE_MESSAGE -> {
@@ -67,7 +73,7 @@ class MainActivity : AppCompatActivity() {
                                 val sbprint = sb.substring(0, endOfLineIndex) // то извлекаем строку
                                 sb.delete(0, sb.length) // и очищаем sb
                                 Log.d("MYLOG", sbprint)
-                                if(sbprint.isNotEmpty() && sbprint.length == 51) {
+                                if(sbprint.isNotEmpty() && sbprint.length == 50) {
                                     runOnUiThread {
                                         hit_1.text = StringHelper().getInfoHits1(sbprint)
                                         btr_1.text = StringHelper().getInfoBtr1(sbprint)
@@ -90,11 +96,14 @@ class MainActivity : AppCompatActivity() {
                             }
                         }
                         CONNECT_MESSAGE_COMPLITE -> {
-                            connectStatus.text = "Подключено"
+                            tvStatus.visibility = View.VISIBLE
+                            tvDevice.text = "${pref.getString(DEVICE_NAME_KEY, "")}"
+                            tvStatus.text = "Подключено"
                             btn_connect.text = "Отключить"
                         }
                         DISCONNECT_MESSAGE -> {
-                            connectStatus.text = "Отключено"
+                            tvStatus.visibility = View.GONE
+                            tvDevice.text = getString(R.string.device_not_connected)
                             btn_connect.text = "Подключить"
                             clearView()
                         }
@@ -128,14 +137,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         btn_send_settings.setOnClickListener {
-
-            val parM1 = intent.getStringExtra("parM1")
-            val parM2 = intent.getStringExtra("parM2")
-            val parM3 = intent.getStringExtra("parM3")
-            val parM4 = intent.getStringExtra("parM4")
-            val parM5 = intent.getStringExtra("parM5")
-            btConnect.sendMsg(parM1 + parM2 + parM3 + parM4 + parM5, this, handler)
-
+            val getSettings = pref.getString(SETTINGS_KEY, "")
+            println(getSettings)
+            if (getSettings!!.isNotEmpty()) {
+                btConnect.sendParam(getSettings, this, handler)
+            }
         }
 
     }

@@ -140,10 +140,15 @@ class BtConnectActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeLis
         when (type) {
             BT_BOUNDED -> {
                 devices = getBoundedDevice()
+                listAdapter = BtListAdapter(this, devices)
+                tv_bt_device.adapter = listAdapter
+            }
+            BT_SEARCH -> {
+                devices!!.clear()
+                listAdapter = BtListAdapter(this, devices)
+                tv_bt_device.adapter = listAdapter
             }
         }
-        listAdapter = BtListAdapter(this, devices)
-        tv_bt_device.adapter = listAdapter
     }
 
     private fun enableSearch() {
@@ -158,9 +163,13 @@ class BtConnectActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeLis
     private fun accessLocationPermission() {
         val accessCL = checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
         val accessFL = checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+        val accessBL = checkSelfPermission(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
         val listRequestPermission: MutableList<String> = ArrayList()
         if (accessCL != PackageManager.PERMISSION_GRANTED) {
             listRequestPermission.add(Manifest.permission.ACCESS_COARSE_LOCATION)
+        }
+        if(accessBL != PackageManager.PERMISSION_GRANTED) {
+            listRequestPermission.add(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
         }
         if (accessFL != PackageManager.PERMISSION_GRANTED) {
             listRequestPermission.add(Manifest.permission.ACCESS_FINE_LOCATION)

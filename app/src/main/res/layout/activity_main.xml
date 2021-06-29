@@ -286,7 +286,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/connectStatus"
+        android:id="@+id/tvDevice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/device_not_connected"
@@ -296,6 +296,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
+
+    <TextView
+        android:id="@+id/tvStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/device_not_connected"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/tvDevice"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tvDevice"
+        app:layout_constraintTop_toBottomOf="@+id/tvDevice"
+        app:layout_constraintVertical_bias="0.514" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -29,6 +29,9 @@ class BtConnection
 
     fun connect(pbProgress: ProgressDialog, context: Context, handler: Handler) {
         val macAdress = pref.getString(MAC_KEY, "")
+        val setr = pref.getString(SETTINGS_KEY, "")
+        println(macAdress)
+        println(setr)
         if(!btAdapter.isEnabled || macAdress!!.isEmpty()) {
             val message = Message.obtain()
             message.what = DISCONNECT_MESSAGE
@@ -48,6 +51,19 @@ class BtConnection
     }
 
     fun sendMsg(msg: String, context: Context, handler: Handler) {
+        try {
+            connectedThread = ConnectedThread(connectThread!!.btSocket, handler)
+            connectedThread!!.write(msg)
+        }catch (e: Exception) {
+            Log.d(BT_CON_TAG, e.printStackTrace().toString())
+            val message = Message.obtain()
+            message.what = DISCONNECT_MESSAGE
+            handler.sendMessage(message)
+            Toast.makeText(context, "Устройство не подключено!", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun sendParam(msg: String, context: Context, handler: Handler) {
         try {
             connectedThread = ConnectedThread(connectThread!!.btSocket, handler)
             connectedThread!!.write(msg)

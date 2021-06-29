@@ -111,8 +111,10 @@ public class BtListAdapter extends BaseAdapter {
     private void savePref(int position) {
         SharedPreferences.Editor editor = pref.edit();
         editor.putString(BtConstKt.MAC_KEY, bluetoothDevices.get(position).getAddress());
+        editor.putString(BtConstKt.DEVICE_NAME_KEY, bluetoothDevices.get(position).getName());
         editor.apply();
     }
+
 
     static class ViewHolder {
         TextView bt_position;
