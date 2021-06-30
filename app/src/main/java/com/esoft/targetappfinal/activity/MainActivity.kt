@@ -78,10 +78,10 @@ class MainActivity : AppCompatActivity() {
                                 when (sbprint) {
                                     "start" -> tvStatus.text = "Статус работы: Запуск мишени!"
                                     "stop" -> tvStatus.text = "Статус работы: Остановка мишени!"
-                                    "settings" -> tvStatus.text =
-                                        "Статус работы: Настройки отправлены!"
                                     "update" -> tvStatus.text = "Статус работы: Сброс попаданий!"
-                                    "hits" -> tvStatus.text = "Статус работы: Запрос попаданий!"
+                                    else -> {
+                                        sb.delete(0, sb.length)
+                                    }
                                 }
 
                                 if (sbprint.isNotEmpty() && sbprint.length == 50) {
@@ -100,7 +100,6 @@ class MainActivity : AppCompatActivity() {
 
                                     hit_5.text = StringHelper().getInfoHits5(sbprint)
                                     btr_5.text = StringHelper().getInfoBtr5(sbprint)
-
                                 }
 
                             }
@@ -128,28 +127,36 @@ class MainActivity : AppCompatActivity() {
 
         btn_connect.setOnClickListener {
             btConnect.connect(pbProg, this, handler)
+            sb.delete(0, sb.length)
         }
 
         btn_hits.setOnClickListener {
             btConnect.sendMsg("@", this, handler)
+            tvStatus.text = "Статус работы: Запрос попаданий!"
+            sb.delete(0, sb.length)
         }
 
         btn_update.setOnClickListener {
             btConnect.sendMsg("#", this, handler)
+            sb.delete(0, sb.length)
         }
 
         btn_start.setOnClickListener {
             btConnect.sendMsg("*", this, handler)
+            sb.delete(0, sb.length)
         }
 
         btn_stop.setOnClickListener {
             btConnect.sendMsg(";", this, handler)
+            sb.delete(0, sb.length)
         }
 
         btn_send_settings.setOnClickListener {
+            sb.delete(0, sb.length)
             val getSettings = pref.getString(SETTINGS_KEY, "")
             println(getSettings)
             if (getSettings!!.isNotEmpty()) {
+                tvStatus.text = "Статус работы: Настройки отправлены!"
                 btConnect.sendParam(getSettings, this, handler)
             }
         }
