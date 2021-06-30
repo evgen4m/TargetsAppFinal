@@ -9,11 +9,13 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.CompoundButton
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.esoft.targetappfinal.R
 import com.esoft.targetappfinal.adapter.BtListAdapter
@@ -23,7 +25,7 @@ import java.util.*
 class BtConnectActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListener {
 
     private lateinit var btAdapter: BluetoothAdapter
-    private var devices: ArrayList<BluetoothDevice>? = null
+    private lateinit var devices: ArrayList<BluetoothDevice>
     private lateinit var listAdapter: BtListAdapter
 
     private val REQ_ENABLE_BT = 10
@@ -31,6 +33,7 @@ class BtConnectActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeLis
     private val BT_SEARCH = 22
     private val REQUEST_CODE_LOC = 1
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bt_connect)
@@ -113,10 +116,9 @@ class BtConnectActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeLis
                     pb_progress.visibility = View.GONE
                 }
                 BluetoothDevice.ACTION_FOUND -> {
-                    val device =
-                        intent.getParcelableExtra<BluetoothDevice>(BluetoothDevice.EXTRA_DEVICE)
-                    if (device != null) {
-                        devices!!.add(device)
+                    val device = intent.getParcelableExtra<BluetoothDevice>(BluetoothDevice.EXTRA_DEVICE)
+                    if (device != null && !devices.contains(device)) {
+                        devices.add(device)
                         listAdapter.notifyDataSetChanged()
                     }
                 }
@@ -136,7 +138,7 @@ class BtConnectActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeLis
     }
 
     private fun setListAdapter(type: Int) {
-        devices!!.clear()
+        devices.clear()
         when (type) {
             BT_BOUNDED -> {
                 devices = getBoundedDevice()
@@ -146,6 +148,7 @@ class BtConnectActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeLis
         tv_bt_device.adapter = listAdapter
     }
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     private fun enableSearch() {
         if (btAdapter.isDiscovering) {
             btAdapter.cancelDiscovery()
@@ -155,6 +158,7 @@ class BtConnectActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeLis
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     private fun accessLocationPermission() {
         val accessCL = checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
         val accessFL = checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
