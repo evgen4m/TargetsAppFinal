@@ -61,35 +61,45 @@ class MainActivity : AppCompatActivity() {
         runOnUiThread {
             handler = @SuppressLint("HandlerLeak")
             object : Handler() {
-                @SuppressLint("SetTextI18n")
+                @SuppressLint("SetTextI18n", "UseCompatLoadingForDrawables")
                 override fun handleMessage(msg: Message) {
                     when (msg.what) {
                         RECIEVE_MESSAGE -> {
                             val readBuf = msg.obj as ByteArray
                             val strIncom = String(readBuf, 0, msg.arg1)
                             sb.append(strIncom) // формируем строку
-                            val endOfLineIndex = sb.indexOf("\r\n") // определяем символы конца строки
+                            val endOfLineIndex =
+                                sb.indexOf("\r\n") // определяем символы конца строки
                             if (endOfLineIndex > 0) {                                            // если встречаем конец строки,
                                 val sbprint = sb.substring(0, endOfLineIndex) // то извлекаем строку
                                 sb.delete(0, sb.length) // и очищаем sb
                                 Log.d("MYLOG", sbprint)
-                                if(sbprint.isNotEmpty() && sbprint.length == 50) {
-                                    runOnUiThread {
-                                        hit_1.text = StringHelper().getInfoHits1(sbprint)
-                                        btr_1.text = StringHelper().getInfoBtr1(sbprint)
 
-                                        hit_2.text = StringHelper().getInfoHits2(sbprint)
-                                        btr_2.text = StringHelper().getInfoBtr2(sbprint)
+                                when (sbprint) {
+                                    "start" -> tvStatus.text = "Статус работы: Запуск мишени!"
+                                    "stop" -> tvStatus.text = "Статус работы: Остановка мишени!"
+                                    "settings" -> tvStatus.text =
+                                        "Статус работы: Настройки отправлены!"
+                                    "update" -> tvStatus.text = "Статус работы: Сброс попаданий!"
+                                    "hits" -> tvStatus.text = "Статус работы: Запрос попаданий!"
+                                }
 
-                                        hit_3.text = StringHelper().getInfoHits3(sbprint)
-                                        btr_3.text = StringHelper().getInfoBtr3(sbprint)
+                                if (sbprint.isNotEmpty() && sbprint.length == 50) {
 
-                                        hit_4.text = StringHelper().getInfoHits4(sbprint)
-                                        btr_4.text = StringHelper().getInfoBtr4(sbprint)
+                                    hit_1.text = StringHelper().getInfoHits1(sbprint)
+                                    btr_1.text = StringHelper().getInfoBtr1(sbprint)
 
-                                        hit_5.text = StringHelper().getInfoHits5(sbprint)
-                                        btr_5.text = StringHelper().getInfoBtr5(sbprint)
-                                    }
+                                    hit_2.text = StringHelper().getInfoHits2(sbprint)
+                                    btr_2.text = StringHelper().getInfoBtr2(sbprint)
+
+                                    hit_3.text = StringHelper().getInfoHits3(sbprint)
+                                    btr_3.text = StringHelper().getInfoBtr3(sbprint)
+
+                                    hit_4.text = StringHelper().getInfoHits4(sbprint)
+                                    btr_4.text = StringHelper().getInfoBtr4(sbprint)
+
+                                    hit_5.text = StringHelper().getInfoHits5(sbprint)
+                                    btr_5.text = StringHelper().getInfoBtr5(sbprint)
 
                                 }
 
@@ -98,13 +108,13 @@ class MainActivity : AppCompatActivity() {
                         CONNECT_MESSAGE_COMPLITE -> {
                             tvStatus.visibility = View.VISIBLE
                             tvDevice.text = "${pref.getString(DEVICE_NAME_KEY, "")}"
-                            tvStatus.text = "Подключено"
-                            btn_connect.text = "Отключить"
+                            tvStatus.text = "Статус работы: Подключено!"
+                            btn_connect.background = getDrawable(R.drawable.ic_btn_disconnect)
                         }
                         DISCONNECT_MESSAGE -> {
                             tvStatus.visibility = View.GONE
                             tvDevice.text = getString(R.string.device_not_connected)
-                            btn_connect.text = "Подключить"
+                            btn_connect.background = getDrawable(R.drawable.ic_btn_connect)
                             clearView()
                         }
 

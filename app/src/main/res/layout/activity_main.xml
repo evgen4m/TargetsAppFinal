@@ -17,13 +17,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/btn_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/toolbar"
-        android:layout_marginStart="22dp"
-        android:layout_marginTop="98dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="100dp"
         android:background="@drawable/ripple_oval"
         android:clickable="true"
         android:focusable="true"
@@ -33,92 +33,75 @@
 
     <ImageButton
         android:id="@+id/btn_stop"
+        style="@style/Widget.AppCompat.ImageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/toolbar"
-        android:layout_marginTop="98dp"
-        android:layout_marginEnd="22dp"
+        android:layout_marginEnd="50dp"
         android:background="@drawable/ripple_oval"
+        android:src="@drawable/ic_btn_stop"
         android:clickable="true"
         android:focusable="true"
-        android:src="@drawable/ic_btn_stop"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_start"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/btn_start" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
+
+    <ImageButton
+        android:id="@+id/btn_connect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="60dp"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_stop"
-        app:layout_constraintEnd_toStartOf="@+id/btn_stop"
-        app:layout_constraintStart_toEndOf="@+id/btn_start"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/ic_btn_connect"
+        android:clickable="true"
+        android:focusable="true"
+        android:textAllCaps="false"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toTopOf="@+id/btn_hits"
+        app:layout_constraintEnd_toEndOf="@+id/btn_hits"
+        app:layout_constraintStart_toStartOf="@+id/btn_hits" />
 
+    <ImageButton
+        android:id="@+id/btn_hits"
+        style="@style/Widget.AppCompat.ImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/ripple_rectangl"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_horizontal"
+        android:src="@drawable/ic_btn_hits"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-        <Button
-            android:id="@+id/btn_connect"
-            android:layout_width="110dp"
-            android:layout_height="36dp"
-            android:background="@drawable/ic_btn_connect"
-            android:clickable="true"
-            android:focusable="true"
-            android:text="Подключить"
-            android:textStyle="normal"
-            android:textAllCaps="false"
-            app:layout_constraintBottom_toBottomOf="@+id/button"
-            app:layout_constraintEnd_toStartOf="@+id/button1"
-            app:layout_constraintStart_toEndOf="@+id/button"
-            app:layout_constraintTop_toTopOf="parent" />
+    <ImageButton
+        android:id="@+id/btn_update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="25dp"
+        android:background="@drawable/ripple_rectangl"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_horizontal"
+        android:src="@drawable/ic_btn_update"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_hits"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btn_hits" />
 
-        <ImageButton
-            android:id="@+id/btn_hits"
-            android:layout_width="110dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:background="@drawable/ripple_rectangl"
-            android:clickable="true"
-            android:focusable="true"
-            android:gravity="center_horizontal"
-            android:padding="5dp"
-            android:src="@drawable/ic_btn_hits"
-            app:layout_constraintBottom_toBottomOf="@+id/button"
-            app:layout_constraintEnd_toStartOf="@+id/button1"
-            app:layout_constraintStart_toEndOf="@+id/button"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageButton
-            android:id="@+id/btn_update"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ripple_rectangl"
-            android:clickable="true"
-            android:focusable="true"
-            android:gravity="center_horizontal"
-            android:src="@drawable/ic_btn_update"
-            app:layout_constraintBottom_toBottomOf="@+id/button"
-            app:layout_constraintEnd_toStartOf="@+id/button1"
-            app:layout_constraintStart_toEndOf="@+id/button"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageButton
-            android:id="@+id/btn_send_settings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/ripple_rectangl"
-            android:clickable="true"
-            android:focusable="true"
-            android:gravity="center_horizontal"
-            android:src="@drawable/ic_btn_send_settings"
-            app:layout_constraintBottom_toBottomOf="@+id/button"
-            app:layout_constraintEnd_toStartOf="@+id/button1"
-            app:layout_constraintStart_toEndOf="@+id/button"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </LinearLayout>
+    <ImageButton
+        android:id="@+id/btn_send_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ripple_rectangl"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_horizontal"
+        android:src="@drawable/ic_btn_send_settings"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_connect"
+        app:layout_constraintEnd_toEndOf="@+id/btn_update"
+        app:layout_constraintTop_toTopOf="@+id/btn_connect" />
 
 
     <ImageView
@@ -126,11 +109,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="50dp"
         android:src="@drawable/ic_line"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_stop" />
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -289,10 +272,10 @@
         android:id="@+id/tvDevice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:text="@string/device_not_connected"
         android:textColor="@color/black"
         android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
@@ -301,16 +284,14 @@
         android:id="@+id/tvStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="@string/device_not_connected"
         android:textColor="@color/black"
         android:textSize="15sp"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/tvDevice"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/tvDevice"
-        app:layout_constraintTop_toBottomOf="@+id/tvDevice"
-        app:layout_constraintVertical_bias="0.514" />
+        app:layout_constraintTop_toBottomOf="@+id/tvDevice" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
