@@ -11,4 +11,6 @@
 
     <color name="toolbarColor">#049CBD</color>
     <color name="themeStyle">#FAFAFA</color>
+
+    <color name="textBackground">#B3D5D0D0</color>
 </resources>

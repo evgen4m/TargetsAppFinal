@@ -23,17 +23,16 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/toolbar"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/ripple_oval"
         android:clickable="true"
         android:focusable="true"
         android:src="@drawable/ic_btn_start"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/linear_text" />
 
     <ImageButton
         android:id="@+id/btn_stop"
-        style="@style/Widget.AppCompat.ImageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/toolbar"
@@ -66,8 +65,8 @@
         style="@style/Widget.AppCompat.ImageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="30dp"
         android:background="@drawable/ripple_rectangl"
         android:clickable="true"
         android:focusable="true"
@@ -80,7 +79,7 @@
         android:id="@+id/btn_update"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="25dp"
+        android:layout_marginEnd="30dp"
         android:background="@drawable/ripple_rectangl"
         android:clickable="true"
         android:focusable="true"
@@ -109,7 +108,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:src="@drawable/ic_line"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -268,30 +267,41 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tvDevice"
+    <LinearLayout
+        android:id="@+id/linear_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="@string/device_not_connected"
-        android:textColor="@color/black"
-        android:textSize="15sp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/text_background"
+        android:orientation="vertical"
+        android:padding="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-    <TextView
-        android:id="@+id/tvStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/device_not_connected"
-        android:textColor="@color/black"
-        android:textSize="15sp"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@+id/tvDevice"
-        app:layout_constraintStart_toStartOf="@+id/tvDevice"
-        app:layout_constraintTop_toBottomOf="@+id/tvDevice" />
+        <TextView
+            android:id="@+id/tvDevice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/device_not_connected"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center"
+            android:text="@string/device_not_connected"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
