@@ -28,12 +28,20 @@ class TargetsSettingsActivity : AppCompatActivity() {
         }
 
         btn_complite.setOnClickListener {
-            savePref("M1%" + parA1.text + "$" + parN1.text + "M2%" + parA2.text + "$" + parN2.text
-            + "M3%" + parA3.text + "$" + parN3.text +"M4%" + parA4.text + "$" + parN4.text
-            + "M5%" + parA5.text + "$" + parN5.text)
-            println("M1%" + parA1.text + "$" + parN1.text + "M2%" + parA2.text + "$" + parN2.text
-                    + "M3%" + parA3.text + "$" + parN3.text +"M4%" + parA4.text + "$" + parN4.text
-                    + "M5%" + parA5.text + "$" + parN5.text)
+            savePref( settings =
+                            "M1%" + checkParam(parA1.text.toString()) + "$" + checkParam(parN1.text.toString()) +
+                            "M2%" + checkParam(parA2.text.toString()) + "$" + checkParam(parN2.text.toString()) +
+                            "M3%" + checkParam(parA3.text.toString()) + "$" + checkParam(parN3.text.toString()) +
+                            "M4%" + checkParam(parA4.text.toString()) + "$" + checkParam(parN4.text.toString()) +
+                            "M5%" + checkParam(parA5.text.toString()) + "$" + checkParam(parN5.text.toString())
+            )
+            println(
+                "M1%" + checkParam(parA1.text.toString()) + "$" + checkParam(parN1.text.toString()) +
+                        "M2%" + checkParam(parA2.text.toString()) + "$" + checkParam(parN2.text.toString()) +
+                        "M3%" + checkParam(parA3.text.toString()) + "$" + checkParam(parN3.text.toString()) +
+                        "M4%" + checkParam(parA4.text.toString()) + "$" + checkParam(parN4.text.toString()) +
+                        "M5%" + checkParam(parA5.text.toString()) + "$" + checkParam(parN5.text.toString())
+            )
             onBackPressed()
         }
 
@@ -49,7 +57,18 @@ class TargetsSettingsActivity : AppCompatActivity() {
             parN4.setText("5")
             parN5.setText("5")
         }
+    }
 
+    private fun checkParam(string: String): String {
+        var result = ""
+        if (string.length == 1)
+            result ="00$string"
+        else if(string.length == 2)
+            result = "0$string"
+        else if(string.length == 3)
+            result = string
+
+        return result
     }
 
 

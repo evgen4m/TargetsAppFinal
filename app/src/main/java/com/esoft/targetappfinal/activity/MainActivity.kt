@@ -55,9 +55,6 @@ class MainActivity : AppCompatActivity() {
         pbProg.setTitle(getString(R.string.text_connection))
         pbProg.setMessage(getString(R.string.text_please_wait))
 
-        println(pref.getString(SETTINGS_KEY, ""))
-        println(pref.getString(MAC_KEY, ""))
-
         runOnUiThread {
             handler = @SuppressLint("HandlerLeak")
             object : Handler() {
@@ -75,14 +72,13 @@ class MainActivity : AppCompatActivity() {
                                 sb.delete(0, sb.length) // и очищаем sb
                                 Log.d("MYLOG", sbprint)
 
-                                when (sbprint) {
-                                    "start" -> tvStatus.text = "Статус работы: Запуск мишени!"
-                                    "stop" -> tvStatus.text = "Статус работы: Остановка мишени!"
-                                    "update" -> tvStatus.text = "Статус работы: Сброс попаданий!"
-                                    else -> {
-                                        sb.delete(0, sb.length)
-                                    }
+                                val result = when (sbprint) {
+                                    "start" -> "Статус работы: Запуск мишени!"
+                                    "stop" -> "Статус работы: Остановка мишени!"
+                                    "update" -> "Статус работы: Сброс попаданий!"
+                                    else -> null
                                 }
+                                tvStatus.text = result?.toString() ?: "Нет информации!"
 
                                 if (sbprint.isNotEmpty() && sbprint.length == 50) {
 
@@ -121,6 +117,10 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
     }
 
     private fun onClick() {
