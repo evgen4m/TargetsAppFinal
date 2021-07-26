@@ -26,6 +26,7 @@ class TargetsSettingsActivity : AppCompatActivity() {
         toolbar.setNavigationOnClickListener {
             onBackPressed()
         }
+        toolbar.title = "Параметры"
 
         btn_complite.setOnClickListener {
             savePref( settings =

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TargetAppFinal</string>
+    <string name="app_name">Targets Control</string>
     <string name="bluetooth_on_off">Вкл./Выкл. Bluetooth</string>
     <string name="btuetooth_off">Bluetooth выключен!</string>
     <string name="enable_search">Начать поиск</string>

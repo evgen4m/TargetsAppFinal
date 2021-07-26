@@ -12,12 +12,12 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.esoft.targetappfinal.R
 import com.esoft.targetappfinal.bluetooth.*
 import com.esoft.targetappfinal.helper.StringHelper
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.toolbar
 
 class MainActivity : AppCompatActivity() {
 

@@ -43,6 +43,7 @@ class BtConnectActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeLis
         toolbar.setNavigationOnClickListener {
             onBackPressed()
         }
+        toolbar.title = "Подключение"
 
         val filter = IntentFilter()
         filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED)
