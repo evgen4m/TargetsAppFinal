@@ -15,8 +15,6 @@
         app:layout_constraintTop_toTopOf="parent">
     </androidx.appcompat.widget.Toolbar>
 
-
-
     <LinearLayout
         android:id="@+id/frame_options"
         android:layout_width="match_parent"
@@ -87,15 +85,32 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:indeterminate="true"
-                android:visibility="gone">
+                android:visibility="gone"/>
 
-            </ProgressBar>
+            <ImageView
+                android:id="@+id/gray_line"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_gray_line"/>
+
+            <TextView
+                android:id="@+id/device_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_gravity="start"
+                android:textSize="13sp"
+                android:textAllCaps="true"
+                android:textColor="@color/gray_text"
+                android:text="@string/bounded_devices"/>
 
             <ListView
                 android:id="@+id/tv_bt_device"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="15dp">
 
             </ListView>
 

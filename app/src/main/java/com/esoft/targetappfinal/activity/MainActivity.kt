@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         init()
         setSupportActionBar(toolbar)
+        supportActionBar!!.title = getString(R.string.control)
         onClick()
 
         pbProg = ProgressDialog(this)
