@@ -13,4 +13,6 @@
     <color name="themeStyle">#FAFAFA</color>
 
     <color name="textBackground">#E1F1F4</color>
+
+    <color name="gray_text">#B0B1B2</color>
 </resources>

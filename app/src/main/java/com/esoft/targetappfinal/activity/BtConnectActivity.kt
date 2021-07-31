@@ -43,7 +43,7 @@ class BtConnectActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeLis
         toolbar.setNavigationOnClickListener {
             onBackPressed()
         }
-        toolbar.title = "Подключение"
+        supportActionBar!!.title = getString(R.string.devices)
 
         val filter = IntentFilter()
         filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED)
@@ -78,11 +78,6 @@ class BtConnectActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeLis
         }
     }
 
-    private fun showConnectToArd() {
-        frame_noConnect.visibility = View.GONE
-        frame_getDevices.visibility = View.VISIBLE
-    }
-
     override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
         if(buttonView!! == switch_enable_bt) {
             enableBt(isChecked)
@@ -110,6 +105,7 @@ class BtConnectActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeLis
                 BluetoothAdapter.ACTION_DISCOVERY_STARTED -> {
                     btn_enable_search.setText(R.string.stop_search)
                     pb_progress.visibility = View.VISIBLE
+                    device_info.text = getString(R.string.search_devices)
                     setListAdapter(BT_SEARCH)
                 }
                 BluetoothAdapter.ACTION_DISCOVERY_FINISHED -> {
@@ -183,6 +179,15 @@ class BtConnectActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeLis
     private fun showMessage() {
         frame_noConnect.visibility = View.VISIBLE
         frame_getDevices.visibility = View.GONE
+        gray_line.visibility = View.GONE
+        device_info.visibility = View.GONE
+    }
+
+    private fun showConnectToArd() {
+        frame_noConnect.visibility = View.GONE
+        frame_getDevices.visibility = View.VISIBLE
+        gray_line.visibility = View.VISIBLE
+        device_info.visibility = View.VISIBLE
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
