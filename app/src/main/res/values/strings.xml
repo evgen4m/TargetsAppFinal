@@ -14,11 +14,4 @@
     <string name="targer_4">Мишень 4</string>
     <string name="targer_5">Мишень 5</string>
     <string name="device_not_connected">Устройство не подключено!</string>
-
-    <string name="bounded_devices">Подключенные устройства</string>
-    <string name="search_devices">Поиск новых устройств</string>
-
-    <string name="devices">Устройства</string>
-    <string name="parametrs">Параметры</string>
-    <string name="control">Управление</string>
 </resources>
